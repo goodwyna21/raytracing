@@ -8,7 +8,7 @@
 
 #include "vec3.h"
 
-#define MESH_DEBUG
+//#define MESH_DEBUG
 
 #define OBJ_NO_FIELD (std::string)"__NONE__"
 #define PNT_NO_FIELD -1

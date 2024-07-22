@@ -77,9 +77,6 @@ std::vector<std::shared_ptr<Mesh::Face>> Mesh::triangulateFace(int index){
 
 #ifdef MESH_DEBUG
     std::cout << "points.size() = " << f->points.size() << "\n";
-    if(_loop_count++ >= 1){
-        break;
-    }
 #endif
 
         for(int i = 0; i < f->points.size()-1; i++){
@@ -133,8 +130,9 @@ std::vector<std::shared_ptr<Mesh::Face>> Mesh::triangulateFace(int index){
         }
     }
 
-    //ret.push_back(f);
-    //ret.push_back(std::make_shared<Mesh::Face>(m_faces.at(index)));
+    if(f->points.size() == 3){
+        ret.push_back(f);
+    } 
     return ret;
 }
 
