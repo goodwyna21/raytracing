@@ -1,47 +1,8 @@
 #ifndef LOADFILE_CPP
 #define LOADFILE_CPP
 
-#define MESH_DEBUG
-
 #include <fstream>
 #include "mesh.h"
-
-#ifdef MESH_DEBUG
-#include <iostream>
-
-void Mesh::debugPrint(){
-    std::cout << "-------- Mesh Contents --------\n";
-    std::cout << "Vertex count:  " << m_vertices.size() << "\n";
-    std::cout << "Faces count:   " << m_faces.size() << "\n";
-    std::cout << "Texture count: " << m_texture_coords.size() << "\n";
-    std::cout << "Normals count: " << m_normals.size() << "\n";
-    std::cout << "---------- Vertices -----------\n";
-    for(int i = 0; i < m_vertices.size(); i++){
-        std::cout << i << ": " << m_vertices.at(i).x << " "
-                               << m_vertices.at(i).y << " "
-                               << m_vertices.at(i).z << "\n";
-    }
-    std::cout << "------------ Faces ------------\n";
-    for(int i = 0; i < m_faces.size(); i++){
-        std::cout << i << ":\n";
-        std::cout << "Material: " << m_faces.at(i).material << "\n";
-        std::cout << "Smoothing group: " << m_faces.at(i).smoothing_group << "\n";
-        std::cout << "Vertices: ";
-        for(Mesh::Point j : m_faces.at(i).points){
-            std::cout << j.vertex << " ";
-        }
-        std::cout << "\nTextures: ";
-        for(Mesh::Point j : m_faces.at(i).points){
-            std::cout << j.texture << " ";
-        }
-        std::cout << "\nNormals: ";
-        for(Mesh::Point j : m_faces.at(i).points){
-            std::cout << j.normal << " ";
-        }
-        std::cout << "\n";
-    }
-}
-#endif
 
 void Mesh::parseOBJLine(const std::string keyword, std::vector<std::string> &arguments){
     float n; //used for storing arguments converted to floats
