@@ -1,6 +1,7 @@
 #ifndef VEC3_HPP
 #define VEC3_HPP
 
+#include <math.h> //sqrt
 #include <stdexcept>
 
 struct Vec2{
@@ -57,6 +58,12 @@ struct Vec3{
     //math operations
     static float dot(const Vec3& a, const Vec3& b){
         return a.x*b.x + a.y*b.y + a.z*b.z;
+    }
+
+    static Vec3 cross(const Vec3& a, const Vec3& b){
+        return {a.y*b.z - a.z*b.y,
+                a.z*b.x - a.x*b.z,
+                a.x*b.y - a.y*b.x};
     }
 };
 
