@@ -6,6 +6,8 @@
 
 class Camera{
 public:
+    struct castReturn;
+
     struct Image{
         std::string fname;
         int width;
@@ -43,7 +45,7 @@ public:
       m_screen_height(screen_height), m_screen_width(screen_width) 
     {}
 
-    Vec3 castRay(const Scene &scene, const Vec3 &origin, const Vec3 &dir);
+    castReturn castRay(const Scene &scene, const Vec3 &origin, const Vec3 &dir);
     void render(const Scene &scene);
     void setImage(const std::string fname, const int width, const int height, const int maxColor){
         m_img.fname = fname;
