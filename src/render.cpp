@@ -3,10 +3,32 @@
 
 #include "camera.h"
 
-
 #include <iostream>
+
 Vec3 Camera::castRay(const Scene &scene, const Vec3 &origin, const Vec3 &dir){
     std::cout << dir.x << " " << dir.y << " " << dir.z << "\n";
+
+    float t;
+    Vec3 normal;
+    float denom;
+    Vec3 A,B,C;
+
+    for(int obj = 0; obj < scene.objectCount(); obj++){
+        for(int face = 0; face < scene.object(obj)->faceCount(); face++){
+            normal = scene.object(obj)->getNormal(scene.object(obj)->getFace(face).normal);
+
+
+            denom = Vec3::dot(normal, dir);
+            if(denom == 0){
+                continue;
+            }
+            t = (scene.object(obj)->getFace(face).planeOffset - Vec3::dot(normal, origin))
+                 / denom;
+
+            
+
+        }
+    }
 }
 
 void Camera::render(const Scene &scene){

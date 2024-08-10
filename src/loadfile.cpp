@@ -169,4 +169,23 @@ std::cout << "(" << match[1] << ")\n";
     return true;
 }
 
+void Mesh::addNormals(){
+    for(Face f : m_faces){
+        f.normal = f.points.at(0).normal;
+        if(f.normal != PNT_NO_FIELD){
+            continue;
+        }
+        m_normals.push_back(Vec3::cross(m_vertices.at(f.points.at(1).vertex) - m_vertices.at(f.points.at(0).vertex),
+                                        m_vertices.at(f.points.at(2).vertex) - m_vertices.at(f.points.at(0).vertex))
+                            .normalize());
+        f.normal = m_normals.size() - 1;
+    }
+}
+
+void Mesh::addPlaneOffsets(){
+    for(Face f : m_faces){
+        f.planeOffset = Vec3::dot(m_normals.at(f.normal),m_vertices.at(f.points.at(0).vertex));
+    }
+}
+
 #endif

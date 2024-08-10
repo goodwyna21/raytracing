@@ -29,6 +29,8 @@ public:
         //std::vector<int> vertices;
         //std::vector<int> textures;
         //std::vector<int> norms;
+        int normal;
+        float planeOffset;
         std::string material;
         std::string smoothing_group;
     };
@@ -38,7 +40,13 @@ public:
             throw std::invalid_argument("Could not open file");
         }
         triangulateFaces();
+        addNormals();
     }
+
+    int faceCount() const { return m_faces.size(); }
+    Face getFace(int index) const { return m_faces.at(index); }
+    Vec3 getNormal(int index) const { return m_normals.at(index); }
+    Vec3 getVertex(int index) const { return m_vertices.at(index); }
 
 #ifdef MESH_DEBUG
     void debugPrint();
@@ -50,6 +58,8 @@ private:
     bool loadOBJFile(const std::string fname);
     void parseOBJLine(const std::string keyword, std::vector<std::string> &arguments);
     void triangulateFaces();
+    void addNormals();
+    void addPlaneOffsets();
     std::vector<std::shared_ptr<Face>> triangulateFace(int index);
     
     std::vector<Vec3> m_vertices;
