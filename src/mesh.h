@@ -8,6 +8,7 @@
 #include "vec3.h"
 
 //#define MESH_DEBUG
+#define MESH_DEBUG_PRINT
 
 #define OBJ_NO_FIELD (std::string)"__NONE__"
 #define PNT_NO_FIELD -1
@@ -48,7 +49,7 @@ public:
     Vec3 getNormal(int index) const { return m_normals.at(index); }
     Vec3 getVertex(int index) const { return m_vertices.at(index); }
 
-#ifdef MESH_DEBUG
+#ifdef MESH_DEBUG_PRINT
     void debugPrint();
     void printFaces();
 #endif
@@ -74,7 +75,7 @@ private:
 };
 
 
-#ifdef MESH_DEBUG
+#ifdef MESH_DEBUG_PRINT
 #include <iostream>
 
 void Mesh::debugPrint(){

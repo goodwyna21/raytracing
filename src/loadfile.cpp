@@ -130,7 +130,9 @@ bool Mesh::loadOBJFile(const std::string fname){
             continue;
         }
 
-std::cout << "(" << match[1] << ")\n";
+#ifdef MESH_DEBUG
+        std::cout << "(" << match[1] << ")\n";
+#endif
 
         keyword = match[1]; //1st capture group is the keyword
 
@@ -143,7 +145,9 @@ std::cout << "(" << match[1] << ")\n";
         //get arguments
         while(!line.empty()){
             std::regex_search(line, match, argument_expr);
+#ifdef MESH_DEBUG
             std::cout << match.size() << "\n";
+#endif
             if(match.size() < 2) continue;
             arguments.push_back(match[1]);
             line = std::regex_replace(line, argument_expr, "");

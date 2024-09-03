@@ -16,7 +16,8 @@ int main(int argc, char** argv){
     std::shared_ptr<Mesh> m = std::make_shared<Mesh>(fname);
     Scene s;
     s.addMesh(m);
-    Camera c({-3,-3.4,-3},{1,1,1});
+    m->debugPrint();
+    Camera c({-3,0,0},{1,0,0});
     c.setImage("output.ppm",IMG_WIDTH,IMG_HEIGHT,IMG_MAXCOLOR);
     c.render(s);
 

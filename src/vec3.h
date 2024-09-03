@@ -83,7 +83,7 @@ Vec3& operator*=(Vec3& v, float n){
 }
 
 Vec3 operator+(const Vec3& a, const Vec3& b){
-    return {a.x+b.x, a.y*b.y, a.z*b.z};
+    return {a.x+b.x, a.y+b.y, a.z+b.z};
 }
 
 Vec3 operator-(const Vec3& a, const Vec3& b){

@@ -4,6 +4,8 @@
 #include "scene.h"
 #include <fstream> //saving ppms
 
+#define CAMERA_DEBUG
+
 class Camera{
 public:
     struct castReturn;
@@ -40,12 +42,17 @@ public:
     };
 
     Camera(Vec3 origin, Vec3 facing, float fov = 90, float tilt = 0, 
-           float screen_height = 4, float screen_width = 4)
+           float screen_height = 2, float screen_width = 2)
     : m_origin(origin), m_facing(facing), m_fov(fov), m_tilt(tilt), 
       m_screen_height(screen_height), m_screen_width(screen_width) 
     {}
 
-    castReturn castRay(const Scene &scene, const Vec3 &origin, const Vec3 &dir);
+    castReturn castRay(const Scene &scene, const Vec3 &origin, const Vec3 &dir
+//dirty trick
+#ifdef CAMERA_DEBUG
+, bool doDebug=false
+#endif
+);
     void render(const Scene &scene);
     void setImage(const std::string fname, const int width, const int height, const int maxColor){
         m_img.fname = fname;
